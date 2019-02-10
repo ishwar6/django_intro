@@ -55,4 +55,11 @@ class CourseModuleUpdateView(TemplateResponseMixin, View):
                 return apps.get_model(app_label='courses',
             model_name=model_name)
             return None
+        
+        def get_form(self, model, *args, **kwargs):
+            Form = modelform_factory(model, exclude=['owner',
+                                                    'order',
+                                                    'created',
+                                                    'updated'])
+            return Form(*args, **kwargs)
        
